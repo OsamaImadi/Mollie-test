@@ -56,6 +56,7 @@ app.get("/:id", (req, res) => {
 });
 
 app.post("/webhook", (req, res) => {
+  console.log("Inside webhook: ", req.body);
   console.log("Inside webhook=====================");
   mollie.payments
     .get(req.body.id)
