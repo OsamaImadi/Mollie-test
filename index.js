@@ -19,11 +19,11 @@ app.post("/create", (req, res) => {
       webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
     })
     .then(payment => {
-      console.log(payment);
+      res.status(200).send(payment);
       // Forward the customer to the payment.getPaymentUrl()
     })
     .catch(err => {
-      console.log("error: ", err);
+      res.status(401).send("error: ", err);
       // Handle the error
     });
 });
