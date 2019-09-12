@@ -5,14 +5,14 @@ const mollie = require("@mollie/api-client")({
 const express = require("express");
 const app = express();
 
-app.post("/create", (req, res) => {
+app.post("/", (req, res) => {
   mollie.payments
     .create({
       amount: {
         value: req.body.value,
         currency: req.body.currency
       },
-      description: req.body.currency,
+      description: req.body.description,
       redirectUrl: "https://mollie-test-app.herokuapp.com/",
       webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
     })
