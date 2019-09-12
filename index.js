@@ -19,7 +19,8 @@ app.post("/create", (req, res) => {
       webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
     })
     .then(payment => {
-      res.status(200).send(payment);
+      // res.status(200).send(payment);
+      res.redirect(payment.getPaymentUrl());
       // Forward the customer to the payment.getPaymentUrl()
     })
     .catch(err => {
