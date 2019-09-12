@@ -1,10 +1,10 @@
 const mollie = require("@mollie/api-client")({
   apiKey: "test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5"
 });
-var cors = require('cors')
+var cors = require("cors");
 const express = require("express");
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -16,7 +16,7 @@ app.get("/redirect", (req, res) => {
 });
 
 app.post("/create", (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   mollie.payments
     .create({
       amount: {
@@ -29,6 +29,7 @@ app.post("/create", (req, res) => {
     })
     .then(payment => {
       // res.status(200).send(payment);
+      console.log(payment.getPaymentUrl());
       res.redirect(payment.getPaymentUrl());
       // Forward the customer to the payment.getPaymentUrl()
     })
@@ -52,11 +53,13 @@ app.get("/:id", (req, res) => {
 });
 
 app.post("/webhook", (req, res) => {
+  console.log("Inside webhook=====================");
   mollie.payments
     .get(req.body.id)
     .then(payment => {
       if (payment.isPaid()) {
         console.log("The payment was recieved");
+        // res.redirect("");
         // Hooray, you've received a payment! You can start shipping to the consumer.
       } else if (!payment.isOpen()) {
         console.log("The payment is not yet paid");
