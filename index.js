@@ -6,6 +6,14 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Homepage");
+});
+
+app.get("/redirect", (req, res) => {
+  res.send("rdirected");
+});
+
 app.post("/create", (req, res) => {
   console.log(req.body);
   mollie.payments
