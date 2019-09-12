@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/redirect", (req, res) => {
+  console.log("Inside redirec: ", req.body);
   res.send("redirected");
 });
 
@@ -31,7 +32,7 @@ app.post("/create", (req, res) => {
     })
     .then(payment => {
       // res.status(200).send(payment);
-      console.log(payment.getPaymentUrl());
+      console.log(payment);
       res.redirect(payment.getPaymentUrl());
       // Forward the customer to the payment.getPaymentUrl()
     })
