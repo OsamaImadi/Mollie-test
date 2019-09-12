@@ -5,7 +5,8 @@ const mollie = require("@mollie/api-client")({
 const express = require("express");
 const app = express();
 
-app.post("/", (req, res) => {
+app.post("/create", (req, res) => {
+  console.log(req.body);
   mollie.payments
     .create({
       amount: {
