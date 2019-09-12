@@ -1,4 +1,5 @@
-const mollie = require("@mollie/api-client")({
+const { createMollieClient } = require("@mollie/api-client");
+const mollie = createMollieClient({
   apiKey: "test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5"
 });
 var cors = require("cors");
