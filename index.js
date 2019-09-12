@@ -1,9 +1,10 @@
 const mollie = require("@mollie/api-client")({
   apiKey: "test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5"
 });
-
+var cors = require('cors')
 const express = require("express");
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 app.get("/", (req, res) => {
