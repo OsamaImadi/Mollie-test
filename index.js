@@ -32,7 +32,7 @@ app.post("/create", (req, res) => {
       // Forward the customer to the payment.getPaymentUrl()
     })
     .catch(err => {
-      res.send("error: ", err);
+      res.send(err);
       // Handle the error
     });
 });
