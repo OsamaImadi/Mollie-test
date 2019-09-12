@@ -69,7 +69,7 @@ app.post("/webhook", (req, res) => {
         console.log("The payment is not yet paid");
         // The payment isn't paid and has expired. We can assume it was aborted.
       }
-      res.send(payment.status);
+      res.send(payment);
     })
     .catch(error => {
       // Do some proper error handling.
