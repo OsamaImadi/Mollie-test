@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/redirect", (req, res) => {
-  res.send("rdirected");
+  res.send("redirected");
 });
 
 app.post("/create", (req, res) => {
@@ -23,7 +23,7 @@ app.post("/create", (req, res) => {
         currency: req.body.currency
       },
       description: req.body.description,
-      redirectUrl: "https://mollie-test-app.herokuapp.com/",
+      redirectUrl: "https://mollie-test-app.herokuapp.com/redirect",
       webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
     })
     .then(payment => {
