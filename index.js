@@ -5,8 +5,8 @@ const mollie = createMollieClient({
 var cors = require("cors");
 const express = require("express");
 const app = express();
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Homepage");
@@ -17,15 +17,16 @@ app.get("/redirect", (req, res) => {
 });
 
 app.post("/create", (req, res) => {
+  // const orderId = new Date().getTime();
   // console.log(req.body);
   mollie.payments
     .create({
       amount: {
-        value: req.body.value,
-        currency: req.body.currency
+        value: "15.00",
+        currency: "EUR"
       },
-      description: req.body.description,
-      redirectUrl: "https://mollie1234.herokuapp.com/",
+      description: "imp payment",
+      redirectUrl: "https://mollie-test-app.herokuapp.com/redirect",
       webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
     })
     .then(payment => {
