@@ -56,10 +56,12 @@ app.get("/:id", (req, res) => {
     .get(req.params.id)
     .then(payment => {
       console.log("recieved payment:", payment);
+      res.send(payment);
       // E.g. check if the payment.isPaid()
     })
     .catch(err => {
       console.log("error: ", err);
+      res.send(err);
       // Handle the error
     });
 });
