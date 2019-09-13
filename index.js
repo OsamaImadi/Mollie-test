@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
   res.send("Homepage");
 });
 
-app.post("/redirect", (req, res) => {
+app.get("/redirect", (req, res) => {
   console.log("Inside redirect: ", req.body);
   res.send("redirected");
 });
@@ -51,18 +51,18 @@ app.post("/create", (req, res) => {
     });
 });
 
-app.get("/:id", (req, res) => {
-  mollie.payments
-    .get(req.params.id)
-    .then(payment => {
-      console.log("recieved payment:", payment);
-      // E.g. check if the payment.isPaid()
-    })
-    .catch(err => {
-      console.log("error: ", err);
-      // Handle the error
-    });
-});
+// app.get("/:id", (req, res) => {
+//   mollie.payments
+//     .get(req.params.id)
+//     .then(payment => {
+//       console.log("recieved payment:", payment);
+//       // E.g. check if the payment.isPaid()
+//     })
+//     .catch(err => {
+//       console.log("error: ", err);
+//       // Handle the error
+//     });
+// });
 
 app.post("/webhook", (req, res) => {
   console.log("Inside webhook: ", req.body);
