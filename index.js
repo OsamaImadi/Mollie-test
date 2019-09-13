@@ -35,7 +35,7 @@ app.post("/create", (req, res) => {
       },
       description: req.body.description,
       redirectUrl: "https://mollie-test-app.herokuapp.com/redirect",
-      webhookUrl: "https://mollie-test-app.herokuapp.com/webhook/:id"
+      webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
     })
     .then(payment => {
       // res.status(200).send(payment);
@@ -64,7 +64,7 @@ app.get("/:id", (req, res) => {
     });
 });
 
-app.post("/webhook/:id", (req, res) => {
+app.post("/webhook", (req, res) => {
   console.log("Inside webhook: ", req.body);
   // console.log("Inside webhook=====================");
   mollie.payments
