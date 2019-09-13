@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/redirect", (req, res) => {
-  console.log("Inside redirec: ", req.body);
+  console.log("Inside redirect: ", req.body);
   res.send("redirected");
 });
 
@@ -28,12 +28,12 @@ app.post("/create", (req, res) => {
       },
       description: req.body.description,
       redirectUrl: "https://mollie-test-app.herokuapp.com/redirect",
-      webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
+      webhookUrl: "https://mollie-test-app.herokuapp.com/webhook/:id"
     })
     .then(payment => {
       // res.status(200).send(payment);
-
-      // res.redirect(303, payment.getPaymentUrl());
+      console.log(payment);
+      // res.redirect(payment.getPaymentUrl());
       res.json({ url: payment.getPaymentUrl() });
 
       // Forward the customer to the payment.getPaymentUrl()
@@ -57,11 +57,11 @@ app.get("/:id", (req, res) => {
     });
 });
 
-app.post("/webhook", (req, res) => {
+app.post("/webhook/:id", (req, res) => {
   console.log("Inside webhook: ", req.body);
-  console.log("Inside webhook=====================");
+  // console.log("Inside webhook=====================");
   mollie.payments
-    .get(req.body.id)
+    .get(req.params.id)
     .then(payment => {
       if (payment.isPaid()) {
         console.log("The payment was recieved");
