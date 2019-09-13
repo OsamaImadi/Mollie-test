@@ -23,10 +23,10 @@ app.post("/create", (req, res) => {
   mollie.payments
     .create({
       amount: {
-        value: "15.00",
-        currency: "EUR"
+        value: req.body.value,
+        currency: req.body.currency
       },
-      description: "imp payment",
+      description: req.body.description,
       redirectUrl: "https://mollie-test-app.herokuapp.com/redirect",
       webhookUrl: "https://mollie-test-app.herokuapp.com/webhook"
     })
