@@ -32,7 +32,7 @@ app.post("/create", (req, res) => {
     })
     .then(payment => {
       // res.status(200).send(payment);
-      console.log(payment);
+      console.log(payment.getPaymentUrl());
       res.redirect(payment.getPaymentUrl());
       // Forward the customer to the payment.getPaymentUrl()
     })
