@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
   res.send("Homepage");
 });
 
-app.get("/redirect", (req, res) => {
+app.post("/redirect", (req, res) => {
   console.log("Inside redirect: ", req.body);
   res.send("redirected");
 });
@@ -68,7 +68,7 @@ app.post("/webhook/:id", (req, res) => {
   console.log("Inside webhook: ", req.body);
   // console.log("Inside webhook=====================");
   mollie.payments
-    .get(req.params.id)
+    .get(req.body.id)
     .then(payment => {
       if (payment.isPaid()) {
         console.log("The payment was recieved");
