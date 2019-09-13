@@ -3,8 +3,15 @@ const mollie = createMollieClient({
   apiKey: "test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5"
 });
 var cors = require("cors");
+var bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
+
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
 app.use(express.json());
 app.use(cors());
 
