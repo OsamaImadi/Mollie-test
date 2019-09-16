@@ -76,9 +76,15 @@ app.post("/webhook", (req, res) => {
         console.log("The payment was recieved");
         // res.redirect("");
         // Hooray, you've received a payment! You can start shipping to the consumer.
-      } else if (!payment.isOpen()) {
-        console.log("The payment is not yet paid");
+      } else if (payment.isOpen()) {
+        console.log("The payment is open");
         // The payment isn't paid and has expired. We can assume it was aborted.
+      } else if (payment.isCanceled()) {
+        console.log("The payment was cancelled");
+      } else if (payment.isFailed()) {
+        console.log("The payment failed");
+      } else if (payment.isExpired()) {
+        console.log("Payment expired");
       }
       res.send(payment);
     })
@@ -89,109 +95,3 @@ app.post("/webhook", (req, res) => {
 });
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log("Example app listening on port: ", port));
-// //test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5
-// const express = require("express");
-
-// const mollie = require("@mollie/api-client")({
-//   apiKey: "test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5"
-// });
-
-// const app = express();
-
-// app.get("/", (req, res) => {
-//   //   const orderId = new Date().getTime();
-//   mollie.payments
-//     .create({
-//       amount: {
-//         value: "10.00",
-//         currency: "EUR"
-//       },
-//       description: "My first API payment",
-//       redirectUrl: "https://yourwebshop.example.org/order/123456",
-//       webhookUrl: "https://yourwebshop.example.org/webhook"
-//     })
-//     .then(payment => {
-//       //console.log("payment: ", payment);
-//       // Forward the customer to the payment.getPaymentUrl()
-//       mollie.payments
-//         .get(payment.id)
-//         .then(payment => {
-//           console.log(payments);
-//           // E.g. check if the payment.isPaid()
-//         })
-//         .catch(err => {
-//           console.log("error: ", err);
-//           // Handle the error
-//         });
-//     })
-//     .catch(err => {
-//       console.log("error: ", err);
-//       // Handle the error
-//     });
-// });
-
-// const express = require("express");
-// const mollieClient = require("@mollie/api-client")({
-//   apiKey: "test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5"
-// });
-
-// const app = express();
-// // const mollieClient = createMollieClient({
-// //   apiKey: "test_mrd5J9kSPqTQUxe2AtJgPSFzpm2KS5"
-// // });
-
-// app.get("/", (req, res) => {
-//   const orderId = new Date().getTime();
-
-//   mollieClient.payments
-//     .create({
-//       amount: { value: "0.00", currency: "USD" },
-//       description: "New payment",
-//       redirectUrl: `https://example.org/redirect?orderId=${orderId}`,
-//       webhookUrl: `http://example.org/webhook?orderId=${orderId}`,
-//       metadata: { orderId }
-//     })
-//     .then(payment => {
-//       // Redirect the consumer to complete the payment using `payment.getPaymentUrl()`.
-//       res.redirect(payment.getPaymentUrl());
-//     })
-//     .catch(error => {
-//       // Do some proper error handling.
-//       res.send(error);
-//     });
-// });
-
-// app.post("/webhook", (req, res) => {
-//   mollieClient.payments
-//     .get(req.body.id)
-//     .then(payment => {
-//       if (payment.isPaid()) {
-//         // Hooray, you've received a payment! You can start shipping to the consumer.
-//       } else if (!payment.isOpen()) {
-//         // The payment isn't paid and has expired. We can assume it was aborted.
-//       }
-//       res.send(payment.status);
-//     })
-//     .catch(error => {
-//       // Do some proper error handling.
-//       res.send(error);
-//     });
-// });
-
-// app.get("/webhook", (req, res) => {
-//   res.send("Get webhook");
-// });
-
-// app.get("/redirect", (req, res) => {
-//   res.send("Get redirect");
-// });
-
-// mollieClient.payments
-//   .get(payment.id)
-//   .then(payment => {
-//     console.log("payment: ", payments);
-//   })
-//   .catch(err => {
-//     console.log(err);
-//     // Handle the error
-//   });
