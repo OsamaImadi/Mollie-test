@@ -94,4 +94,4 @@ app.post("/webhook", (req, res) => {
     });
 });
 const port = process.env.PORT || 8000;
-app.listen(port, () => console.log("Example app listening on port: ", port));
+app.listen(port, () => console.log("Mollie listening on port: ", port));
